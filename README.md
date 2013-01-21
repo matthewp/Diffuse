@@ -49,11 +49,11 @@ var feed = RSS.createFeed({
 });
 ```
 
-Some elements are required according to [RSS spec](http://cyber.law.harvard.edu/rss/rss.html#requiredChannelElements), and these are created for you automatically. Usually you would at least prefer to specify a `title`, `link` and a `description`, but diffuse will accept anything you throw at it. Unlike `createFeed`, `createItem` does not have any defaults.
+Some elements are required according to [RSS spec](http://cyber.law.harvard.edu/rss/rss.html#requiredChannelElements), and these are created for you automatically. Usually you would at least prefer to specify a `title`, `link` and a `description`, but diffuse will accept anything you throw at it.
 
 **Adding items**
 
-Call `#addItem` to add an item to your feed. This behaves similarly to `createFeed`, by building whatever elements you provide it.
+Call `#addItem` to add an item to your feed. This behaves similarly to `createFeed`, by building whatever elements you provide it.  Unlike `createFeed`, this does not have any defaults.
 
 ```js
 var item = feed.addItem({
