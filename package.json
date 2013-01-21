@@ -1,0 +1,11 @@
+{
+    "name": "diffuse",
+    "version": "0.0.1",
+    "description": "RSS generator",
+    "keywords": ["rss"],
+    "repository": "git://github.com/Weltschmerz/Diffuse.git",
+    "author": "Weltschmerz <wltsmrz@gmail.com>",
+    "maintainer": "Weltschmerz <wltsmrz@gmail.com>",
+    "main": "index.js",
+    "engines": { "node": ">= 0.5.0" }
+}
