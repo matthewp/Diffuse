@@ -6,7 +6,6 @@ A fast and simple RSS generator for Node.
 
 ```js
 var RSS = require('diffuse');
-var http = require('http');
 
 var feed = RSS.createFeed({
   title: 'Amphibious Rodents',
@@ -65,7 +64,7 @@ var item = feed.addItem({
 
 The `title` and `description` of the feed as well as items within it are wrapped in [CDATA](http://en.wikipedia.org/wiki/CDATA) blocks, so your descriptions may contain HTML. Give her hell.
 
-**Rendering your fee**
+**Rendering your feed**
 
 To render your feed, call `#render`. This returns the generated XML of your RSS feed, and accepts a callback.
 
