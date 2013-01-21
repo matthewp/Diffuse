@@ -88,8 +88,6 @@ var item = feed.addItem({
 });
 
 item.set('title', 'My modified title. I  didn\'t mean to say butt. Silly me.'
-item.title.set('text', 'Hello ');
-item.title.set('text', item.title.get('text') + 'world');
 item.title.set('attrs', { href: 'www.example.com' });
 ```
 
