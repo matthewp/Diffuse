@@ -19,6 +19,8 @@ feed.addItem({
   guid: '2013-1-20',
   pubDate: (new Date).toUTCString()
 });
+
+feed.render();
 ```
 
 ##Usage
@@ -31,7 +33,7 @@ var RSS = require('diffuse');
 
 **Creating a feed**
 
-Just call `#createFeed` with an object containing elements & their contents.
+Just call `#createFeed` with an object containing elements & their contents. Some elements are required according to [RSS spec](http://cyber.law.harvard.edu/rss/rss.html#requiredChannelElements), and these are created for you automatically. Usually you would at least prefer to specify a `title`, `link` and a `description`, but diffuse will accept anything you throw at it.  The `title` and `description` of the feed as well as items within it are wrapped in [CDATA](http://en.wikipedia.org/wiki/CDATA) blocks, so your descriptions may contain HTML. Give her hell.
 
 ```js
 var feed = RSS.createFeed({
@@ -49,7 +51,15 @@ var feed = RSS.createFeed({
 });
 ```
 
-Some elements are required according to [RSS spec](http://cyber.law.harvard.edu/rss/rss.html#requiredChannelElements), and these are created for you automatically. Usually you would at least prefer to specify a `title`, `link` and a `description`, but diffuse will accept anything you throw at it.
+**Adding feed elements**
+
+Just call `appendChild`
+
+```js
+  var feed = RSS.createFeed({title: 'my feed'});
+  var link = RSS.createElement('link', 'www.example.com');
+  feed.appendChild(link);
+```
 
 **Adding items**
 
@@ -62,11 +72,9 @@ var item = feed.addItem({
 });
 ```
 
-The `title` and `description` of the feed as well as items within it are wrapped in [CDATA](http://en.wikipedia.org/wiki/CDATA) blocks, so your descriptions may contain HTML. Give her hell.
-
 **Rendering your feed**
 
-To render your feed, call `#render`. This returns the generated XML of your RSS feed, and accepts a callback.
+To render your feed, call `#render`. This returns the generated XML of your RSS feed, and accepts a callback. Diffuse has an internal caching mechanism. Diffuse watches its document structure for modifications, and caches your generated XML. Re-rendering only needs to occur when the document has been modified. This happens either when you add a new item, or items have been modified using `item#set`. This gives it a significant performance advantage.
 
 ```js
 var data = feed.render();
@@ -75,8 +83,6 @@ feed.render(function(err, data) {
   //Do stuff
 });
 ```
-
-Diffuse has an internal caching mechanism. Diffuse watches its document structure for modifications, and caches your generated XML. Re-rendering only needs to occur when the document has been modified. This happens either when you add a new item, or items have been modified using `item#set`. This gives it a significant performance advantage.
 
 **More item configuration**
 
@@ -104,6 +110,29 @@ var mine = RSS.createElement('strong', ' Mine.');
 anchor.appendChild(mine);
 
 var content = anchor.toString();  // <a href='http://www.google.com'>My anchor. <strong>Mine.</strong></a>
+```
+
+Another example for adding an `image` to your feed:
+
+```js
+var RSS = require('diffuse');
+var element = RSS.createElement;
+
+var feed = RSS.createFeed({
+  title: 'example',
+  link: 'http://www.example.com',
+  description: 'example feed'
+});
+
+var image = (function() {
+  var image = element('image');
+  var link = element('link', 'http://example.com/');
+  var title = element('title', 'example'));
+  var url = element('url', 'http://example.com/image.png');
+  return image.appendChild(link, title, url);
+})();
+
+feed.appendChild(image);
 ```
 
 ##License
