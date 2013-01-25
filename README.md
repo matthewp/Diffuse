@@ -10,7 +10,7 @@ var RSS = require('diffuse');
 var feed = RSS.createFeed({
   title: 'Amphibious Rodents',
   link: 'http://www.amphibiousrodentsclub.com',
-  description: 'Where we share our thoughts about amphibiosu rodents'
+  description: 'Where we share our thoughts about amphibious rodents'
 });
 
 feed.addItem({
